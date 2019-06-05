@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{width:100px;height:100px;background: red;position: absolute;left: 0;top:0;}
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+<script src="../cookie.js"></script>
+<script>
+
+    class Drag{
+        constructor(){
+            this.box = document.querySelector(".box");
+
+            this.init()
+            this.getPos()
+        }
+        init(){
+            var that = this;
+
+            // 因为使用事件监听绑定事件，删除事件时要找原函数，所以提前使用bind计算出改变this之后的新函数
+            this.m = that.move.bind(that);
+            this.u = that.up.bind(that);
+
+            this.box.addEventListener("mousedown",function(eve){
+                var e = eve || window.event;
+                that.x = e.offsetX;
+                that.y = e.offsetY;
+                // 使用bind改变this指向之后的新函数，作为事件处理函数
+                document.addEventListener("mousemove",that.m)
+                document.addEventListener("mouseup",that.u)
+            })
+        }
+        move(eve){
+            var e = eve || window.event;
+            // console.log(this)
+            this.box.style.left = e.pageX - this.x + "px";
+            this.box.style.top = e.pageY - this.y + "px";
+        }
+        up(){
+            // 因为bind生成的函数被提前保存了，所以删除的时候找到的还是同一个函数
+            document.removeEventListener("mousemove",this.m)
+            document.removeEventListener("mouseup",this.u)
+            this.setCookie();
+        }
+        setCookie(){
+            var pos = {
+                x:this.box.offsetLeft,
+                y:this.box.offsetTop
+            }
+            setCookie("pos",JSON.stringify(pos),{
+                expires:3
+            })
+        }
+        getPos(){
+            this.pos = JSON.parse(getCookie("pos"))
+            // console.log(this.pos)
+            this.box.style.left = this.pos.x + "px";
+            this.box.style.top = this.pos.y + "px";
+        }
+    }
+
+
+    new Drag()
+</script>
+</html>

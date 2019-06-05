@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="abc">
+    <input type="text" id="qwe">
+    <input type="button" id="btn">
+</body>
+<script>
+    var aaa = document.getElementById("abc");
+    var bbb = document.getElementById("qwe");
+    var obtn = document.getElementById("btn");
+
+    obtn.onclick = function(){
+        var url = "http://localhost/1903/ajax/data/post.php";
+        ajax(url,function(res){
+            console.log(res)
+        },{
+            sdf:aaa.value,
+            fgh:bbb.value
+        })
+    }
+
+
+    function ajax(url,callback,data){
+        // 1.解析对象："name1=value1&name2=value2"
+        data = data ? data : {};
+        var str = "";
+        for(var i in data){
+            str += `${i}=${data[i]}&`;
+        }
+
+        // 2.开启ajax
+        // 2.1.创建ajax对象
+        var ajax = new XMLHttpRequest();
+        // 2.2开启拨号
+        ajax.open("post",url,true);
+        // 2.3监听状态
+        ajax.onreadystatechange = function(){
+            if(ajax.readyState == 4 && ajax.status == 200){
+                // 2.3.1执行用户传进来的函数callback，同时把请求成功的数据，返回给用户
+                callback(ajax.responseText)
+            }
+        }
+        // 2.4开启发送
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        
+        ajax.send(str.slice(0,str.length-1));
+    }
+
+
+    // get改post
+    // 1.将open的第一个参数改成post
+    // 2.处理url上的数据，放在send中
+    // 3.设置发送数据的格式，必须在send之前设置
+    // 4.post请求不走缓存，可以把时间戳去掉了
+
+</script>
+</html>

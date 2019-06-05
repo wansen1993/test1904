@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="abc">
+    <input type="text" id="qwe">
+    <input type="button" id="btn" value="登录">
+</body>
+<script>
+
+    var ouser = document.getElementById("abc")
+    var opass = document.getElementById("qwe")
+    var obtn = document.getElementById("btn")
+
+
+    obtn.onclick = function(){
+        var u = ouser.value;
+        var p = opass.value;
+
+        var url = "http://localhost/1903/ajax/data/get2.php";
+        ajaxGet(url,function(res){
+            if(res == 1){
+                document.body.style.background = "green";
+            }else{
+                document.body.style.background = "red";
+            }
+        },{
+            user:u,
+            pass:p
+        });
+    }
+
+    function ajaxGet(url,callback,data){
+        // 1.做要发送的数据处理
+        // 处理成：....?user=admin&pass=123
+        data = data ? data : {};
+        var str = ""
+        for(var i in data){
+            str = str + i + "=" + data[i] + "&";
+        }
+        var d = new Date()
+        str = str + "_qft=" + d.getTime();
+        url = url + "?" + str;
+        // 2.开启ajax请求
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET",url,true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                callback(xhr.responseText);
+            }
+        }
+        xhr.send(null);
+    }
+
+</script>
+</html>

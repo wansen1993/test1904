@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>测试jsonp3</h1>
+</body>
+<script>
+    // jsonp是通过script标签引入资源
+    
+    // 发现：
+    // 只要是被script标签引入的文件，都会先解析，解析之后，将输出的字符，按照js代码执行
+    function fn(res){
+        console.log(res)
+    }
+</script>
+<script src="http://127.0.0.1/1903/jsonp/data/jsonp3.php"></script>
+</html>

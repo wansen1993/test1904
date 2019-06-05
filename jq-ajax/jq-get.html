@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script src="../jquery.2.2.4.js"></script>
+<script>
+
+    $(document).click(function(){
+        var url = "http://localhost/1903/jq-ajax/data/get123.php";
+        var get = $.get(url,{
+            a:10,
+            b:20
+        },function(a,b,c){
+            console.log(JSON.parse(a))
+            // console.log(a)
+            console.log(b)
+            console.log(c)
+        }).then(function(a,b,c){
+            console.log(JSON.parse(a))
+            // console.log(a)
+            console.log(b)
+            console.log(c)
+        },function(a,b,c){
+            console.log(a)
+            console.log(b)
+            console.log(c)
+        })
+        // console.log(get)
+    })
+
+</script>
+</html>

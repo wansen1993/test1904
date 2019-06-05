@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    
+    document.onclick = function(){
+        // 打电话：
+        // 有手机：
+        var aaa = new XMLHttpRequest();
+        // 拨号键盘：方式，号，是否在做其他事
+        var d = new Date();
+        var url = "http://localhost/1903/ajax/data/data.txt?"+d.getTime();
+        aaa.open("get",url,true);
+        // 监听联通状态：
+        aaa.onreadystatechange = function(){
+            // console.log(aaa.readyState)
+            if(aaa.readyState == 4 && aaa.status == 200){
+                console.log(aaa.responseText);
+            }
+        }
+        // 客套话：
+        aaa.send(null);
+
+    }
+
+</script>
+</html>

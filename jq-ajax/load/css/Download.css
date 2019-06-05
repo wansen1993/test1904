@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.download ul li a{float:left;font:12px/29px "";color:#858585;}
+.download ul li{overflow:hidden;border-bottom:1px dotted #9f9f9f;}
+.download ul li span{float:right;color:#c6c6c6;font:12px/29px "";margin-right:50px;}
+.download ul li .a-l{text-indent:18px;position:relative;}
+.download ul li .a-r{float:right;color:#4270a5;position:relative;margin-right:24px;}
+.download ul li .a-r .icon-dow{position:absolute;background:url(../images/dow-icon_03.png) no-repeat;width:13px;height:14px;top:7px;left:-20px;}
+.download ul li a.a-l:after{content:"";position:absolute;width:3px;height:3px;border-right:2px solid #de0010;border-bottom:2px solid #de0010;
+transform:rotate(-45deg);top:13px;left:6px;}
+
+
+
+
+
+
+
+
+
+
+
+

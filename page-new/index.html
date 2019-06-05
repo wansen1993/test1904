@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            *{
+                margin: 0 ; 
+                padding: 0;
+                list-style-type: none;
+            }
+            .pagWarp{
+                height: 40px;
+                box-shadow: 0 2px 5px #b6b6b6;
+                position: absolute;
+                border-radius: 2px;
+                right: 42%;
+                top: 430px;
+            }
+            #btnL,#btnR{
+                line-height: 40px;
+                cursor: pointer;
+            }
+            #btnL{
+                float: left;
+            }
+            #btnR{
+                float: right;             
+            }
+            .pagWarp ul{        
+                height: 40px;
+                margin: 0 auto;
+                float: left;
+                text-align: center;
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .pagWarp ul li{
+                float: left;
+                text-align: center;
+                line-height: 40px;
+                padding: 0 4px;
+            }
+            .active{
+                color: blue;
+                font-size: 24px;
+            }
+        
+            /* 商品列表样式 */
+        .list{
+            width: 80%;
+            margin: 20px auto;
+        }
+        .list:after{
+            content:'';
+            display: block;
+            clear: both;
+        }
+        .list li{
+            padding:2%;
+            width: 15%;
+            float: left;
+            height: 300px;
+            color: #666;
+            border-right: 1px solid #b6b6b6;
+              box-shadow: 2px 2px 5px #b6b6b6;  
+              margin-left: 8px;
+              margin-top: 20px;
+        }
+        .list li h2{
+            font-size: 18px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .list .img{
+            width: 100%;
+            border: 1px solid #b6b6b6;
+            height: 180px;
+        }
+        .list input[type=button]{
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #b6b6b6;
+            width: 100px;
+            height: 80px;
+        }
+        </style>
+</head>
+<body>
+    <ul class="list" id="list">
+    
+    </ul>
+    <div class="pagWarp" id="pageWarp">
+        <span id="btnL">上一页</span>
+        <ul id="pageCont">
+        </ul>
+        <span id="btnR">下一页</span>
+    </div>
+</body>
+<script src="ajax.2.0.js"></script>
+<script>
+
+    class Page{
+        constructor(){
+            // 1.选择元素
+            this.list = document.getElementById("list");
+            this.left = document.getElementById("btnL");
+            this.right = document.getElementById("btnR");
+            this.pageCont = document.getElementById("pageCont");
+            this.url = "http://localhost/1903/page-new/goods.json";
+
+            // 一页显示几条数据
+            this.num = 5;
+            // 默认在第几页
+            this.index = 0;
+
+            // 2.请求数据
+            this.load();
+            // 5.绑定点击事件
+            this.addEvent()
+        }
+        load(){
+            var that = this;
+            ajax({
+                url:this.url,
+                success:function(res){
+                    // 解析数据
+                    that.res = JSON.parse(res);
+                    // 3.渲染页面
+                    that.display()
+                    // 4.渲染页码
+                    that.createPage()
+                }
+            })
+        }
+        display(){
+            // console.log(this.res)
+            // 开始渲染页面
+            var str = "";
+            
+            // 根据index和num显示每页的数据
+
+            // 0~5     this.num5 * this.index0 ~ this.num5 * this.index0 + this.num5
+            // 5~10    this.num5 * this.index1 ~ this.num5 * this.index1 + this.num5
+            // 10~15   this.num5 * this.index2 ~ this.num5 * this.index2 + this.num5
+            for(var i=this.num*this.index;i<this.num*this.index+this.num;i++){
+                // 当i不在length范围内时不拼接
+                if(i < this.res.length){
+                    str += `<li>
+                            <img src="${this.res[i].url}" alt="" class="img">        
+                            <h2>商品名称:<span>${this.res[i].name}</span></h2>
+                            <h2>商品介绍:<span>${this.res[i].tip}</span></h2>
+                            <h2>商品价格:<span>${this.res[i].price}</span></h2>
+                        </li>`;
+                }
+            }
+            this.list.innerHTML = str;
+        }
+        createPage(){
+            // 计算一共有几页
+            this.maxNum = Math.ceil(this.res.length / this.num);
+            // 渲染页码
+            var str = "";
+            for(var i=0;i<this.maxNum;i++){
+                str += `<li>${i+1}</li>`
+            }
+            this.pageCont.innerHTML = str;
+            // 设置当前页的当前项
+            this.pageCont.children[this.index].className = "active";
+        }
+        addEvent(){
+            var that = this;
+            this.left.onclick = function(){
+                // 6-1.计算索引
+                that.changeIndex("l")
+            }
+            this.right.onclick = function(){
+                // 6-2.计算索引
+                that.changeIndex("r")
+            }
+        }
+        changeIndex(type){
+            if(type == "l"){
+                if(this.index == 0){
+                    this.index = this.maxNum-1;
+                }else{
+                    this.index--
+                }
+            }else{
+                if(this.index == this.maxNum-1){
+                    this.index = 0
+                }else{
+                    this.index++
+                }
+            }
+            // 7.渲染页面
+            this.display()
+            // 8.改变页码的当前项
+            this.changeActive()
+        }
+        changeActive(){
+            // 改变页码的当前项
+            for(var i=0;i<this.pageCont.children.length;i++){
+                this.pageCont.children[i].className = "";
+            }
+            this.pageCont.children[this.index].className = "active";
+        }
+    }
+
+
+    new Page()
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    // 增：document.cookie = "名=值"
+    function setCookie(key,value,options){
+        options = options ? options : {};
+        // 处理默认有效期
+        if(options.expires){
+            var d = new Date();
+            d.setDate(d.getDate()+options.expires);
+            var expi = ";expires="+d;
+        }else{
+            var expi = "";
+        }
+        // 处理默认路径
+        var path = options.path ? ";path="+options.path : "";
+        // 开始设置
+        document.cookie = key+"="+value + expi + path;
+    }
+    // setCookie("a","10",{      //有路径，有有效期
+    //     expires:3,
+    //     path:"/1903"
+    // })
+    // setCookie("b","20",{      //只有有限期
+    //     expires:3
+    // })
+    // setCookie("c","30",{      //只有路径
+    //     path:"/1903"
+    // })
+    // setCookie("d","40",{})    //会话级
+    // setCookie("e","50")       //会话级
+    // setCookie("user","admin")       //会话级
+    // setCookie("age","18")       //会话级
+
+    // 删
+    function removeCookie(key,options){
+        options = options ? options : {};
+        options.expires = -1;
+        setCookie(key,"asmhdgashd",options);
+    }
+    // removeCookie("a",{
+    //     path:"/1903"
+    // })
+    // removeCookie("b")
+    // removeCookie("c",{
+    //     path:"/1903"
+    // })
+    
+    // 查
+    function getCookie(key){
+        var arr = document.cookie.split("; ");
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].split("=")[0] === key){
+                return arr[i].split("=")[1];
+            }
+        }
+    }
+    // console.log(getCookie("a"))
+    // console.log(getCookie("b"))
+    // console.log(getCookie("c"))
+    // console.log(getCookie("d"))
+    // console.log(getCookie("e"))
+    // console.log(getCookie("user"))
+    // console.log(getCookie("age"))
+    // console.log(getCookie("sex"))
+    // console.log(getCookie("abc"))
+</script>
+</html>

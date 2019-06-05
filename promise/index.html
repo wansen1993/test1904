@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    document.onclick = function(){
+        var p1 = ajaxGet("http://localhost/1903/promise/data/d1.php");
+        var p2 = ajaxGet("http://localhost/1903/promise/data/d22.php");
+        var p3 = ajaxGet("http://localhost/1903/promise/data/d3.php");
+
+        Promise.all([p1,p2,p3]).then(function(res){
+            console.log("全部成功")
+            console.log(res)
+        }).catch(function(res){
+            console.log("有一个失败")
+            console.log(res)
+        })
+    }
+
+
+
+    function ajaxGet(url,data){
+        data = data ? data : {};
+        var str = ""
+        for(var i in data){
+            str = str + i + "=" + data[i] + "&";
+        }
+        var d = new Date()
+        str = str + "_qft=" + d.getTime();
+        url = url + "?" + str;
+        var p = new Promise((s,e)=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET",url,true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    s(xhr.responseText);
+                }else if(xhr.readyState == 4 && xhr.status != 200){
+                    e(xhr.status);
+                }
+            }
+            xhr.send(null);
+        })
+        return p;
+    }
+</script>
+</html>

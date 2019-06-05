@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 查：
+    // console.log(document.cookie)
+    // document的属性，能获取又能设置
+
+    // 增：默认cookie
+    // document.cookie = "user=admin";
+    // document.cookie = "age=18";
+
+    var d = new Date();
+    d.setDate(d.getDate()+3);
+    // 增：有有效期的cookie
+    // document.cookie = "age=18;expires="+d;
+
+    // 增：有有效期，有路径
+    // document.cookie = "c=30;expires="+d+";path=/1903/cookie/child"
+
+    // 改：重复设置就是改
+    // document.cookie = "age=20"
+
+    var d2 = new Date();
+    d2.setDate(d2.getDate()-1)
+    // 删：有效期设置成过去的日期
+    document.cookie = "b=asdfkajg;expires="+d2;
+</script>
+</html>

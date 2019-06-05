@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="msg"></div>
+</body>
+<script src="../jquery.2.2.4.js"></script>
+<script>
+
+    $(document).click(function(){
+        
+        // $.ajax(url,{})
+        
+        // 所有常用属性
+        // $.ajax({
+        //     url:"http://localhost/1903/jq-ajax/data/get.php",
+        //     type:"get",
+        //     data:{
+        //         a:"admin",
+        //         b:16
+        //     },
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     error:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     // beforeSend:function(){},
+        //     // dataType:"jsonp",
+        //     // jsonp:"cb",
+        //     // timeout:10,
+        //     // global:true
+        // })
+        
+        // 最简化的ajax
+        // $.ajax({
+        //     url:"http://localhost/1903/jq-ajax/data/get.php",
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     }
+        // })
+        
+        // 跨域的ajax
+        // $.ajax({
+        //     url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+        //     data:{
+        //         wd:"html"
+        //     },
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     dataType:"jsonp",       //表示跨域请求
+        //     jsonp:"cb"              //回调函数名所在的字段名
+        // })
+
+        // 最简化的具有超时功能的ajax
+        // $.ajax({
+        //     url:"http://localhost/1903/jq-ajax/data/get.php",
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     error:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     timeout:1
+        // })
+
+
+        // 最简化的具有全局事件的ajax
+        // $(document).ajaxStart(function(){
+        //     alert("ajax开启之前")
+        // })
+        // $.ajax({
+        //     url:"http://localhost/1903/jq-ajax/data/get.php",
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //     },
+        //     global:false
+        // })
+
+
+        // 利用ajax的beforesend实现正在加载功能
+        // $.ajax({
+        //     url:"http://localhost/1903/jq-ajax/data/get.php",
+        //     success:function(a,b,c){
+        //         console.log(a)
+        //         console.log(b)
+        //         console.log(c)
+        //         $(".msg").empty()
+        //     },
+        //     beforeSend:function(){
+        //         $(".msg").append($("<img>").attr("src","timg.gif"));
+        //     }
+        // })
+    })
+
+</script>
+</html>

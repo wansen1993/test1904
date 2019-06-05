@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="abc">
+    <input type="text" id="qwe">
+    <input type="button" id="btn">
+</body>
+<script src="../ajax.js"></script>
+<script>
+    var aaa = document.getElementById("abc");
+    var bbb = document.getElementById("qwe");
+    var obtn = document.getElementById("btn");
+
+    obtn.onclick = function(){
+        var url = "http://localhost/1903/ajax/data/ajax.php";
+        ajax({
+            url:url,                //必传
+            type:"post",             //可选，默认为get
+            data:{                  //可选，默认不发数据
+                sdf:aaa.value,
+                fgh:bbb.value
+            },
+            success:function(res){  //必传
+                console.log(res)
+            }
+        })
+    }
+</script>
+</html>

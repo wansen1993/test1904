@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    用户名：<input type="text" id="user"><br>
+    密码：<input type="text" id="pass"><br>
+    <label for="remember"><input type="checkbox" id="remember">记住密码七天</label>
+    <input type="button" id="btn" value="登录">
+</body>
+<script src="../cookie.js"></script>
+<script>
+
+    class Remember{
+        constructor(){
+            this.user = document.getElementById("user");
+            this.pass = document.getElementById("pass");
+            this.remember = document.getElementById("remember");
+            this.btn = document.getElementById("btn");
+
+            this.init()
+            this.getUser();
+        }
+        init(){
+            var that = this;
+            this.btn.onclick = function(){
+                if(that.remember.checked){
+                    // 存cookie
+                    that.setCookie()
+                }else{
+                    // 删cookie
+                    that.removeCookie()
+                }
+            }
+        }
+        setCookie(){
+            var data = {
+                u:this.user.value,
+                p:this.pass.value
+            }
+            setCookie("info",JSON.stringify(data),{
+                expires:7
+            })
+        }
+        getUser(){
+            this.info = JSON.parse(getCookie("info"))
+            this.user.value = this.info.u;
+            this.pass.value = this.info.p;
+        }
+        removeCookie(){
+            removeCookie("info");
+        }
+    }
+
+    new Remember;
+
+</script>
+</html>

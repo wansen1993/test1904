@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>测试jsonp5</h1>
+    <input type="text" id="aaa">
+    <input type="text" id="bbb">
+    <input type="button" id="btn">
+</body>
+<script>
+    var obtn = document.getElementById("btn")
+    var oaaa = document.getElementById("aaa")
+    var obbb = document.getElementById("bbb")
+
+
+
+    obtn.onclick = function(){
+        var oa = oaaa.value;
+        var ob = obbb.value;
+
+        var url = "http://127.0.0.1/1903/jsonp/data/jsonp5.php";
+        
+        jsonp(url,function(res){
+            console.log(res)
+        },{
+            user:oa,
+            pass:ob,
+            // "cb表示后端规定的函数名所在的字段名"
+            cb:"asmjdgajksd",
+            // cloumnName表示前端的函数如何正确找到函数名
+            cloumnName:"cb"
+        });
+    }
+    
+    function jsonp(url,callback,data){
+        data = data ? data : {};
+        let str = "";
+        for(let i in data){
+            str += `${i}=${data[i]}&`;
+        }
+        url = url + "?" + str.slice(0,str.length-1);
+
+        // 1.script标签
+        var script = document.createElement("script");
+        script.src = url;
+        document.body.appendChild(script);
+        // 2.函数
+
+        // window[data["callback"]] = function(res){
+        // window["asmjdgajksd"] = function(res){
+        // window.asmjdgajksd = function(res){
+
+        window[data[data.cloumnName]] = function(res){
+            callback(res)
+        }
+    }
+
+    // function fun(){
+    //     window.a = 10;
+    // }
+    // fun()
+    // console.log(a)
+
+
+</script>
+</html>

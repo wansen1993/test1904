@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大众电子首页</title>
+    <link rel="stylesheet" href="css/public.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="../../jquery.2.2.4.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("http://localhost/1903/jq-ajax/load/data/head.html .margin",function(a,b,c){
+                $(".nav li").mouseover(function(){
+                    $(this).css({
+                        border:"solid 2px black"
+                    })
+                })
+            });
+            $("#footer").load("http://localhost/1903/jq-ajax/load/data/head.html .qffoot");
+
+
+
+        })
+    </script>
+</head>
+<body>
+	<div id="header">
+		
+	</div>
+    <div id="banner" class="margin">
+    	<a href="#" class="banner"><img src="images/banner_03.png" /></a>
+        <ul class="clear">
+        	<li><a class="te" href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </div>
+    <div id="content" class="margin">
+    	<div class="title">
+        	<h3>产品中心</h3>
+        </div>
+        <div class="show">
+        	<ul class="clear">
+            	<li class="li1 clear">
+                	<h4>票据打印机RP80</h4>
+                    <a class="a-img" href="#"><img src="images/show-img_03.png"/></a>
+                    <div class="box">
+                        <h5>特点:</h5>
+                        <p>1、250mm/s高速打印，快速变更耗材，提高工作效率</p>
+                        <p>2、低噪音，高速图形及硬字库...</p>
+                        <a class="txt" href="#">更多>></a>
+                    </div>
+                   
+                </li>
+                <li class="li2">
+                	<h4>针式打印机RP76ll</h4>
+                    <a class="a-img" href="#"><img src="images/a-img2_03.png"/></a>
+                    <div class="box">
+                        <h5>特点:</h5>
+                        <p>1、4.4行/秒高速打印，支持多种国际语言 2、外观时尚精美，操作简单 3、一机多...</p>
+                        <a class="txt" href="#">更多>></a>
+                    </div>
+                   
+                </li>
+                <li class="li3 clear">
+                	<h4>票据打印机RP80</h4>
+                    <a class="a-img" href="#"><img src="images/a-img3_03.png"/></a>
+                    <div class="box">
+                        <h5>特点:</h5>
+                        <p>1、大齿轮，长寿命，高速度，坚久耐用 2低噪音的直接热敏打印方式 3、外观时尚精...</p>
+                        <a class="txt" href="#">更多>></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="article">
+        	<ul class="clear">
+            	<li>
+                	<h4>关于我们</h4>
+                    <a class="a-img" href="#"><img src="images/a-img1_03.png"/></a>
+                    <p>厦门荣大合众电子科技有限公司成立于2007年，是一家专业研发、生产、销售POS打印机、票据打印机、打印单元、控制板及POS周边产业的高新技术企业。公司自成立以来，一直专注票据打印领域。经过多年的发展和技术积累，公司设计研发的多种打印设备深受国内外广大客户欢迎。</p>
+                    <a class="txt">更多>></a>
+                </li>
+                <li class="li2">
+                	<h4>新闻资讯</h4>
+                    <dl>
+                        <dd><span>2016-03-24</span><a href="#">2016年3月墨西哥商超设备展</a></dd>
+                        <dd><span>2016-03-24</span><a href="#">德国很冷，CEBIT很--相约容大2016德国汉诺威展</a></dd>
+                        <dd><span>2016-01-25</span><a href="#">2016年容大新年第一展-纽约零售电子展</a></dd>
+                        <a class="txt" href="#">更多>></a>
+                    </dl>
+                </li>
+                <li>
+                	<h4>容大理念</h4>
+                    <h5>第一时间，有效性答复客户进展性消息。</h5>
+                    <h5>对技术领域持续创新、精益求精，是公司赢得众多客户信任和支持的重要原因。</h5>
+                	<a class="txt" href="#">更多>></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="footer" class="margin">
+    	
+    </div>
+    <div id="contact-us">
+    	<h3>客服中心<a class="btn" href="#"></a></h3>
+        <img src="images/lianxi-bg_03.png" />
+        <dl>
+            <dd>
+            	<p>客服01：<a href="#"></a></p>
+            </dd>
+            <dd>
+            	<p>客服02：<a href="#"></a></p>
+            </dd>
+            <dd>
+            	<p>技术01：<a href="#"></a></p>
+            </dd>
+            <dd>
+            	<p>技术02：<a href="#"></a></p>
+            </dd>
+        </dl>
+    </div>
+</body>
+</html>

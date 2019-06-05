@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            *{
+                margin:0;
+                padding: 0;
+            }
+    
+    
+            #search{
+                width: 600px;
+                margin:0 auto;	
+                margin-top: 20px;
+                position: relative;
+            }
+            #search input{
+    
+                width: 480px;
+                height: 100%;
+                border: 1px solid #b6b6b6;
+                height: 20px;
+                padding: 9px 7px;
+                font: 16px arial;
+                border: 1px solid #b8b8b8;
+                border-bottom: 1px solid #ccc;
+                border-right: 0;
+                vertical-align: top;
+                outline: none;
+                box-shadow: none;
+                -webkit-appearance: textfield;
+                background-color: white;
+                -webkit-rtl-ordering: logical;
+                user-select: text;
+    
+            }
+    
+            #search button{
+                cursor: pointer;
+                box-sizing: border-box;
+                width: 97px;
+                   height: 40px;
+                line-height: 38px;
+                padding: 0;
+                border: 0;
+                background: none;
+                background-color: #38f;
+                font-size: 16px;
+                color: white;
+                box-shadow: none;
+                font-weight: normal;
+                 margin-left: -20px;
+            }
+            
+            .result{
+                position: absolute;
+                
+                padding: 9px 7px;
+                background: #ddd;
+    
+            }
+    
+            .search-res{
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 480px;
+                border: 1px solid #b6b6b6;
+                border-top: none;
+            }
+    
+            .search-res li{
+                list-style-type: none;
+                line-height: 20px;
+                padding: 2px 5px;
+                border-bottom: 1px solid #b6b6b6;
+            }
+        
+        </style>    
+</head>
+<body>
+    <div id="search">
+        <input type="text" id="txt">
+        <button>嗖嗖嗖一下</button>
+        <ul class="search-res" id="list">
+        
+        </ul>
+    </div>
+</body>
+<script src="../ajax.2.0.js"></script>
+<script>
+    class Search{
+        constructor(){
+            // 1.获取元素
+            this.txt = document.getElementById("txt")
+            this.list = document.getElementById("list")
+            this.url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su"
+
+            // 2.绑定事件
+            this.init()
+        }
+        init(){
+            var that = this;
+            this.txt.oninput = function(){
+                // console.log(this.value)
+                that.value = this.value;
+                // 3.请求数据
+                that.load();
+            }
+        }
+        load(){
+            var that = this;
+            ajax({
+                url:this.url,
+                data:{
+                    wd:this.value,
+                    cloumnName:"cb",
+                    cb:"asdasdsa"
+                },
+                type:"jsonp",
+                success:function(res){
+                    // 保存数据
+                    that.res = res;
+                    // 4.根据数据渲染页面
+                    that.display()
+                }
+            })
+        }
+        display(){
+            // 开始渲染页面
+            // console.log(this.res.s)
+            var str = "";
+            for(var i=0;i<this.res.s.length;i++){
+                str += `<li>${this.res.s[i]}</li>`
+            }
+            this.list.innerHTML = str;
+        }
+    }
+    
+    new Search()
+</script>
+</html>
